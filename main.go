@@ -126,17 +126,13 @@ func sendNotifications(bot *tgbotapi.BotAPI) {
 func sendReport(bot *tgbotapi.BotAPI) {
 	for {
 		t := time.Now()
-		ts := t.Format(time.UnixDate)
-		tsArr := strings.Split(ts, " ")
-		tts := tsArr[3]
-		ttsArr := strings.Split(tts, ":")
-		hour := ttsArr[0]
-		minute := ttsArr[1]
-		if hour == botconfd.SendHour1 && minute == botconfd.SendMinute1 {
+		cTime := t.Format(time.Kitchen)
+
+		if cTime == botconfd.SendTime1 {
 			sendNotifications(bot)
 			time.Sleep(time.Minute * 1)
 		}
-		if hour == botconfd.SendHour2 && minute == botconfd.SendMinute2 {
+		if cTime == botconfd.SendTime2 {
 			sendNotifications(bot)
 			time.Sleep(time.Minute * 1)
 		}
